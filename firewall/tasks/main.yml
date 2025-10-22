@@ -1,0 +1,23 @@
+---
+- name: Install firewalld
+  yum:
+    name: firewalld
+    state: present
+
+- name: Start and enable firewalld
+  service:
+    name: firewalld
+    state: started
+    enabled: yes
+
+- name: Allow HTTP service
+  firewalld:
+    service: http
+    permanent: yes
+    state: enabled
+    immediate: yes
+
+- name: Reload firewalld
+  command: firewall-cmd --reload
+  become: yes
+

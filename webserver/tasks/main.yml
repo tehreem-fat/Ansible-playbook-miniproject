@@ -1,0 +1,19 @@
+---
+- name: Install Apache web server
+  yum:
+    name: httpd
+    state: present
+
+- name: Copy custom index file
+  copy:
+    src: index.html
+    dest: /var/www/html/index.html
+  notify:
+    - restart apache
+
+- name: Start and enable Apache
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+
